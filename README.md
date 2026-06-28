@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # Rahul Kumar Portfolio
 
-Premium black-and-white software engineering portfolio built with React, Vite, Framer Motion, GSAP and custom CSS.
+Premium black-and-white software engineering  built with React, Vite, Framer Motion, GSAP and custom CSS.
 
 ## What is improved in this version
 

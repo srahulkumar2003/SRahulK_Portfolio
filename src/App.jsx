@@ -301,7 +301,7 @@ function Hero() {
     <section id="home" className="hero-section section-shell">
       <div className="hero-left">
         <motion.div initial="hidden" animate="show" variants={stagger}>
-          <motion.span className="micro-label" variants={fadeUp}>Software Engineering Portfolio</motion.span>
+          <motion.span className="micro-label" variants={fadeUp}>Software Engineering </motion.span>
           <motion.h1 variants={fadeUp}>Rahul,<br />Software<br />Engineer.</motion.h1>
           <motion.h2 variants={fadeUp}>Cloud • DevOps • <em>AI</em> Systems.</motion.h2>
           <motion.div variants={fadeUp}><RoleSwitcher /></motion.div>
