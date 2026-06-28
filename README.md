@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Rahul Kumar Portfolio
 
 Premium black-and-white software engineering portfolio built with React, Vite, Framer Motion, GSAP and custom CSS.
@@ -50,3 +51,7 @@ github: '#',
 ```
 
 with your real Live Demo and GitHub links.
+=======
+# SRahulK_Portfolio
+I build backend-first software systems, cloud-ready applications, and AI-assisted product workflows with a focus on clean architecture, deployment readiness, and recruiter-visible engineering proof.
+>>>>>>> 855cb4a05a948bbdcf4932b25556db2ff30f8ba7
