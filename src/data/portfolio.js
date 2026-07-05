@@ -14,8 +14,8 @@ export const profile = {
   japaneseProfile: '/assets/documents/Rahul_Japanese_Profile.pdf',
   photo: '/assets/rahul-profile.jpg',
   heroPhoto: '/assets/rahul-photo.jpg',
-  introVideo: '/assets/intro/rahul-black-white-intro.mp4',
-  introPoster: '/assets/intro/rahul-black-white-intro-poster.jpg',
+  introVideo: '/assets/intro/rahul-cinematic-intro.mp4',
+  introPoster: '/assets/intro/rahul-cinematic-intro-poster.jpg',
   summary:
     'I build backend-first software systems, cloud-ready applications, and AI-assisted product workflows with a focus on clean architecture, deployment readiness, and recruiter-visible engineering proof.',
 };
@@ -193,19 +193,6 @@ export const workflow = [
 
 export const experience = [
   {
-    role: 'Full Stack Developer Intern',
-    company: 'Trigovex Technologies Pvt. Ltd.',
-    period: 'Jul 2024 - Feb 2025',
-    type: 'Remote',
-    stack: ['React', 'REST APIs', 'RBAC', 'Docker', 'JavaScript'],
-    impact: 'Built frontend modules, integrated REST APIs, supported RBAC flows and worked with Docker-based setup.',
-    points: [
-      'Developed responsive full stack modules using React.js, JavaScript, REST API integration and reusable UI components.',
-      'Worked on role-based access control, form handling, backend API integration and data validation.',
-      'Supported Docker-based setup and smoother development and deployment workflows.',
-    ],
-  },
-  {
     role: 'DevOps Intern',
     company: 'Swecha Foundation, APSCHE Collaboration',
     period: 'Jun 2024 - Aug 2024',
@@ -314,18 +301,18 @@ export const projects = [
   {
     title: 'Bus Booking System',
     year: '2024',
-    type: 'Booking Platform',
-    category: 'Smart Travel Booking System',
+    type: 'MERN Platform',
+    category: 'MERN-Based Travel Booking Platform',
     description:
-      'A travel booking application with route search, booking flow, confirmation logic and database-driven ticket operations.',
+      'MERN-based smart travel booking platform inspired by modern bus apps like redBus, FlixBus and AbhiBus, focused on solving real passenger problems such as pickup confusion, seat availability uncertainty, delay updates, refund tracking and operator trust.',
     focus:
-      'Implemented user management, booking records, availability handling and transaction-style data updates.',
-    tech: ['React', 'Spring Boot', 'MySQL', 'REST APIs'],
+      'Built route search, user management, interactive seat booking, confirmation logic, cancellation flow, refund status tracking and an admin dashboard using React.js, Node.js, Express.js and MongoDB.',
+    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'JavaScript', 'JWT', 'Tailwind CSS'],
     image: '/assets/projects/bus-booking-system.png',
     live: '#',
     github: '#',
-    outcome: 'Proves standard CRUD, booking logic, database operations and REST API integration for real user workflows.',
-    proof: ['Route search', 'Booking records', 'Availability and confirmation logic'],
+    outcome: 'Demonstrates real-world MERN product thinking through passenger-focused booking, cancellation, refund tracking and operator management workflows.',
+    proof: ['Route search', 'Interactive seat booking', 'Cancellation flow', 'Refund status tracking', 'Admin dashboard'],
   },
 ];
 
@@ -334,6 +321,8 @@ export const research = {
   event: 'International Conference on Cognitive Informatics Engineering and Technology - 2026',
   certificate: '/assets/research/CIET_2026_Certificate.png',
   presentation: '/assets/research/OOD_Quality_Dashboard_Research_Presentation.pptx',
+  finalPaper: '/assets/research/Final_Paper.pdf',
+  finalPaperDocx: '/assets/research/Final_Paper.docx',
   summary:
     'Research focused on improving software maintainability using object-oriented metrics, class-level quality grading and actionable refactoring suggestions.',
   metrics: ['WMC', 'RFC', 'CBO', 'LCOM', 'DIT'],
@@ -349,8 +338,8 @@ export const certifications = [
   { name: 'RPA Certificate', issuer: 'Automation 360', date: 'Certified', image: '/assets/certificates/rpa-certificate.png', link: '/assets/certificates/rpa-certificate.pdf', tag: 'Automation' },
   { name: 'Power BI Workshop', issuer: 'OfficeMaster', date: 'Certified', image: '/assets/certificates/power-bi-workshop.png', link: '/assets/certificates/power-bi-workshop.pdf', tag: 'Analytics' },
   { name: 'Hackera Hackathon Finalist', issuer: 'GITAM University', date: '2025', image: '/assets/certificates/hackera-finalist.png', link: '/assets/certificates/hackera-finalist.pdf', tag: 'Achievement' },
-  { name: 'Cloud Computing Internship', issuer: 'Teachnook + Cognizance’24 IIT Roorkee', date: '2024', image: '/assets/certificates/cloud-computing-internship.png', link: '/assets/certificates/cloud-computing-internship.pdf', tag: 'Cloud' },
-  { name: 'Swecha Foundation Internship', issuer: 'Swecha Foundation / APSCHE', date: '2024', image: '/assets/certificates/swecha-internship.png', link: '/assets/certificates/swecha-internship.png', tag: 'Internship' },
+  { name: 'Cloud Computing Internship', issuer: 'Teachnook + Cognizance’24 IIT Roorkee', date: '2024', image: '/assets/certificates/cloud-computing-internship.png', link: '/assets/certificates/cloud-computing-internship.pdf', tag: 'Cloud', tags: ['Cloud', 'Internship'] },
+  { name: 'Swecha Foundation Internship', issuer: 'Swecha Foundation / APSCHE', date: '2024', image: '/assets/certificates/swecha-internship.png', link: '/assets/certificates/swecha-internship.png', tag: 'Internship', tags: ['DevOps', 'Internship'] },
   { name: 'IAEPT Professional Membership', issuer: 'IAEPT', date: 'Member', image: '/assets/certificates/iaept-membership.png', link: '/assets/certificates/iaept-membership.pdf', tag: 'Achievement' },
 ];
 

@@ -44,6 +44,64 @@ import {
 } from './data/portfolio';
 
 
+
+const backgroundTokens = [
+  'Spring Boot',
+  'REST API',
+  'Docker',
+  'CI/CD',
+  'AWS',
+  'React',
+  'MongoDB',
+  'AI',
+];
+
+function BackgroundEffects() {
+  return (
+    <div className="bg-effects" aria-hidden="true">
+      <div className="bg-gradient-mesh" />
+      <div className="bg-grid-shift" />
+      <div className="bg-scanline" />
+      <div className="bg-orb orb-one" />
+      <div className="bg-orb orb-two" />
+      <div className="bg-orb orb-three" />
+      <div className="bg-circuit circuit-a">
+        <span /><span /><span /><span />
+      </div>
+      <div className="bg-circuit circuit-b">
+        <span /><span /><span /><span />
+      </div>
+      <div className="floating-code-cloud">
+        {backgroundTokens.map((token, index) => (
+          <span
+            key={token}
+            style={{
+              '--x': `${8 + ((index * 17) % 84)}%`,
+              '--delay': `${index * -1.35}s`,
+              '--speed': `${16 + (index % 5) * 3}s`,
+            }}
+          >
+            {token}
+          </span>
+        ))}
+      </div>
+      <div className="particle-field">
+        {Array.from({ length: 12 }, (_, index) => (
+          <i
+            key={index}
+            style={{
+              '--x': `${(index * 37) % 100}%`,
+              '--y': `${(index * 19) % 100}%`,
+              '--delay': `${index * -0.65}s`,
+              '--size': `${3 + (index % 4)}px`,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function GitHubMark({ size = 18 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -115,23 +173,36 @@ function ScrollProgress() {
 function IntroOverlay({ onEnter }) {
   return (
     <motion.div
-      className="intro-overlay"
+      className="intro-overlay cinematic-intro"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.55 } }}
+      exit={{ opacity: 0, transition: { duration: 0.45 } }}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === 'Escape') onEnter();
+      }}
+      tabIndex={-1}
     >
-      <video className="intro-video" autoPlay muted playsInline loop poster={profile.introPoster}>
+      <video className="intro-video" autoPlay muted playsInline poster={profile.introPoster}>
         <source src={profile.introVideo} type="video/mp4" />
       </video>
-      <div className="intro-glass">
-        <span>Engineering Portfolio</span>
-        <h1>Rahul Kumar</h1>
-        <p>Software Engineer focused on Backend, Cloud, DevOps, and AI-assisted systems.</p>
-        <div className="intro-actions">
-          <button onClick={onEnter}>Open Portfolio <ArrowRight size={17} /></button>
-          <button className="quiet" onClick={onEnter}>Skip Intro</button>
-        </div>
+      <div className="intro-vignette" />
+      <div className="intro-skip-row">
+        <button className="intro-skip" onClick={onEnter}>Skip Intro</button>
       </div>
+      <motion.div
+        className="intro-glass"
+        initial={{ opacity: 0, y: 24, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ delay: 1.05, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <span>Engineering Portfolio</span>
+        <h1>Samboju Rahul Kumar</h1>
+        <p>Backend • Cloud • DevOps • AI Systems</p>
+        <div className="intro-progress-bar"><i /></div>
+        <div className="intro-actions">
+          <button onClick={onEnter}>Enter Portfolio <ArrowRight size={17} /></button>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
@@ -590,7 +661,10 @@ function Research() {
             <h3>{research.title}</h3>
             <p>{research.summary}</p>
             <div className="metric-row">{research.metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-            <a className="secondary-action" href={research.presentation} download>Download Research Deck <Download size={17} /></a>
+            <div className="research-actions">
+              <a className="secondary-action" href={research.presentation} download>Download Research Deck <Download size={17} /></a>
+              <a className="secondary-action" href={research.finalPaper} download>Final Paper <FileText size={17} /></a>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -599,9 +673,10 @@ function Research() {
 }
 
 function Certificates() {
-  const filters = useMemo(() => ['All', ...Array.from(new Set(certifications.map((cert) => cert.tag)))], []);
+  const getCertTags = (cert) => cert.tags || [cert.tag];
+  const filters = useMemo(() => ['All', ...Array.from(new Set(certifications.flatMap(getCertTags)))], []);
   const [active, setActive] = useState('All');
-  const visible = active === 'All' ? certifications : certifications.filter((cert) => cert.tag === active);
+  const visible = active === 'All' ? certifications : certifications.filter((cert) => getCertTags(cert).includes(active));
 
   return (
     <section id="certificates" className="cert-section section-shell section-pad">
@@ -619,7 +694,7 @@ function Certificates() {
         {visible.map((cert) => (
           <motion.a className="cert-card" href={cert.link} target="_blank" rel="noreferrer" key={cert.name} variants={fadeUp}>
             <img src={cert.image} alt={cert.name} />
-            <div><span>{cert.tag}</span><h3>{cert.name}</h3><p>{cert.issuer} • {cert.date}</p></div>
+            <div><span>{getCertTags(cert).join(' • ')}</span><h3>{cert.name}</h3><p>{cert.issuer} • {cert.date}</p></div>
           </motion.a>
         ))}
       </motion.div>
@@ -699,17 +774,17 @@ function App() {
   const [showIntro, setShowIntro] = useState(() => {
     if (typeof window === 'undefined') return false;
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    return !reducedMotion && window.localStorage.getItem('rahul-portfolio-intro-seen') !== 'true';
+    return !reducedMotion && window.sessionStorage.getItem('rahul-portfolio-intro-seen-v2') !== 'true';
   });
 
   const closeIntro = () => {
-    window.localStorage.setItem('rahul-portfolio-intro-seen', 'true');
+    window.sessionStorage.setItem('rahul-portfolio-intro-seen-v2', 'true');
     setShowIntro(false);
   };
 
   useEffect(() => {
     if (!showIntro) return undefined;
-    const timer = window.setTimeout(closeIntro, 5200);
+    const timer = window.setTimeout(closeIntro, 4600);
     return () => window.clearTimeout(timer);
   }, [showIntro]);
 
@@ -719,13 +794,22 @@ function App() {
   }, [showIntro]);
 
   useEffect(() => {
-    gsap.to('.architecture-card', { y: -8, duration: 2.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-    gsap.to('.project-visual', { y: -6, duration: 3.4, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: 0.18 });
-    gsap.to('.tech-logo-item img', { rotate: 3, duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: 0.1 });
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const smallScreen = window.matchMedia?.('(max-width: 900px)').matches;
+    if (reduceMotion || smallScreen) return undefined;
+
+    const ctx = gsap.context(() => {
+      gsap.to('.architecture-card', { y: -5, duration: 3.6, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      gsap.to('.project-visual', { y: -4, duration: 4.4, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: 0.28 });
+      gsap.to('.tech-logo-item img', { rotate: 2, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: 0.16 });
+    });
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <div className="app">
+      <BackgroundEffects />
       <AnimatePresence>{showIntro && <IntroOverlay onEnter={closeIntro} />}</AnimatePresence>
       <Navbar />
       <ScrollRail />

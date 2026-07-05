@@ -18,3 +18,8 @@
 - Add live demo links where deployed.
 - Confirm final resume PDF and Japan profile PDF are the latest versions.
 - Deploy on Vercel or Netlify after `npm run build` passes locally.
+
+## 2026-07-05
+- Added a new Final Paper download button in the Research section.
+- Added `Final_Paper.pdf` and `Final_Paper.docx` under `public/assets/research/`.
+- Replaced the main resume PDF with the latest uploaded resume while keeping the existing resume path unchanged.
